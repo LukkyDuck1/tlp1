@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+
+
+
+
+<h1>PROYECTOS</h1>
+
+    
+{{user.username | upper}} Bienvenido
+{% if tipo_usuario == 'estudiante' %}
+
+<br>
+<form action="{% url 'propuestas' %}" >
+
+
+  {% csrf_token %}
+  
+  <input type="text" name="nombre" id="id_nombre" value="{{ form.nombre.value }}" required>
+  <textarea name="descripcion" id="id_descripcion" required>{{ form.descripcion.value }}</textarea>
+  <input type="checkbox" name="patrocinio" id="id_patrocinio" {% if form.patrocinio.value %}checked{% endif %}>
+  <br>
+  <button type="submit">Enviar</button>
+</form>
+
+
+{% elif tipo_usuario == 'profesor' %}
+<br>
+<form action="{% url 'lista' %}" >
+
+
+  <button type="submit">Enviar</button>
+</form>
+<form action="{% url 'lista' %}" method="get">
+  <input type="checkbox" name="filtrar_patrocinio" id="filtrar_patrocinio" {% if request.GET.filtrar_patrocinio %}checked{% endif %}>
+  <label for="filtrar_patrocinio">Filtrar por patrocinio</label>
+  <br>
+  <button type="submit">Aplicar Filtro</button>
+</form>
+<ul class="list-group">
+  {% for propuesta in propuestas %}
+    <li class="list-group-item">{{propuesta.nombre}}</li>
+  {% endfor %}
+</ul>
+<br>
+{%else%}
+<ul class="list-group">
+  {%if request.user.is_authenticated %}
+    <form action="{% url 'lista' %}" method="get">
+      <input type="checkbox" name="filtrar_patrocinio" id="filtrar_patrocinio" {% if request.GET.filtrar_patrocinio %}checked{% endif %}>
+      
+      <br>
+      <button type="submit">Aplicar Filtro</button>
+    </form>
+  {% endif %}
+  {%if request.user.is_authenticated %}
+    {% for propuesta in propuestas %}
+      <li class="list-group-item">
+        {{propuesta.nombre}}
+        
+      </li>
+    {% endfor %}
+  {%else%}
+    <ul class="list-group">
+      <form action="{% url 'listaanon' %}">
+        {% for propuesta in propuestas %}
+          <li class="list-group-item">{{propuesta.nombre}}</li>
+        {% endfor %}
+        <button type="submit">Enviar</button>
+      </form>
+
+    </ul>
+    <br>
+  {% endif %}
+
+</ul>
+
+{% endif %}

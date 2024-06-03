@@ -1,0 +1,29 @@
+{%if request.user.is_authenticated %}
+      {{user.username | upper}} Bienvenido
+
+    {%else%}
+      <h1>LOGIN</h1>
+      <br>
+      <form action="" method="post">
+        {% csrf_token %}
+        
+
+        <div class="form-floating mb-3">
+          <input type="text" name="username" class="form-control" id="floatingInput" placeholder="Usuario">
+          <label for="floatingInput">Nombre de usuario</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Contraseña">
+          <label for="floatingPassword">Contraseña</label>
+        </div>
+        <br>
+        <button type="submit">Login</button>
+
+
+      </form>
+
+      <a href="{% url 'logout' %}">Cerrar sesión</a>
+    {% endif %}
+    <br>
+    <br>
+    

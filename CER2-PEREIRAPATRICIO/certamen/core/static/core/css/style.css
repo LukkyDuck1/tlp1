@@ -1,0 +1,54 @@
+.navbar {
+    background-color: #005e90 !important;
+
+}
+.navbar-brand{
+    color: #ffffff !important;
+
+
+
+}
+.nav-link{
+    color: #ffffff !important;
+
+}
+header{
+    position:fixed;
+    top: 0;
+    width: 100%;
+    
+
+}
+#inicio{
+    background-color: #7a9daf !important;
+
+}
+#proyectos{
+    background-color: #ffffff !important;
+
+
+
+}
+#login{
+    background-color: #adb4be !important;
+
+
+
+}
+.col{
+    font-family: 'Montserrat'!important;
+    
+
+
+
+}
+.tes{
+    color: #ffffff;
+
+    font-size: 60px;
+}
+.tess{
+    color: #000000;
+
+    font-size: 60px;
+}
